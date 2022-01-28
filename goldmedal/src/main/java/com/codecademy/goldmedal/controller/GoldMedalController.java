@@ -1,14 +1,14 @@
 package com.codecademy.goldmedal.controller;
 
 import com.codecademy.goldmedal.model.*;
+import com.codecademy.goldmedal.repositories.CountryRepository;
+import com.codecademy.goldmedal.repositories.GoldMedalRepository;
 import org.apache.commons.text.WordUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.codecademy.goldmedal.repositories.*;
 
 @RestController
 @RequestMapping("/countries")
@@ -45,8 +45,14 @@ public class GoldMedalController {
     private CountryMedalsListResponse getCountryMedalsListResponse(String countryName, String sortBy, boolean ascendingOrder) {
         List<GoldMedal> medalsList;
         switch (sortBy) {
+            // TODO: list of medals sorted by year in the given order
             case "year":
-                medalsList = // TODO: list of medals sorted by year in the given order
+                if(ascendingOrder == true){
+                    medalsList = this.goldMedalRepository.findByNameOrderByYearAsc(countryName);
+                }
+                else{
+                    medalsList = this.goldMedalRepository.findByNameOrderByYearDesc(countryName);
+                }
                 break;
             case "season":
                 medalsList = // TODO: list of medals sorted by season in the given order
@@ -69,13 +75,14 @@ public class GoldMedalController {
     }
 
     private CountryDetailsResponse getCountryDetailsResponse(String countryName) {
-        var countryOptional = // TODO: get the country; this repository method should return a java.util.Optional
+        // get the country; this repository method should return a java.util.Optional
+        var countryOptional = this.countryRepository.findByName(countryName);
         if (countryOptional.isEmpty()) {
             return new CountryDetailsResponse(countryName);
         }
 
         var country = countryOptional.get();
-        var goldMedalCount = // TODO: get the medal count
+        var goldMedalCount = this.goldMedalRepository.findByCountry(country.getName());// TODO: get the medal count
 
         var summerWins = // TODO: get the collection of wins at the Summer Olympics, sorted by year in ascending order
         var numberSummerWins = summerWins.size() > 0 ? summerWins.size() : null;

@@ -1,11 +1,10 @@
 package com.codecademy.goldmedal.repositories;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
+import com.codecademy.goldmedal.model.Country;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CountryRepository extends CrudRepository<Country, id>{
+import java.util.Optional;
 
+public interface CountryRepository extends CrudRepository<Country, Integer> {
+    Optional<Country> findByName(String name);
 }
