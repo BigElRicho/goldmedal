@@ -13,11 +13,11 @@ import com.codecademy.goldmedal.repositories.*;
 @RestController
 @RequestMapping("/countries")
 public class GoldMedalController {
-    // TODO: declare references to your repositories
+    // declare references to your repositories
     private GoldMedalRepository goldMedalRepository;
     private CountryRepository countryRepository;
 
-    // TODO: update your constructor to include your repositories
+    // update your constructor to include your repositories
     public GoldMedalController(GoldMedalRepository goldMedalRepository, CountryRepository countryRepository) {
         this.goldMedalRepository = goldMedalRepository;
         this.countryRepository = countryRepository;
