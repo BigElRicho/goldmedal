@@ -1,0 +1,11 @@
+package com.codecademy.goldmedal.repositories;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface CountryRepository extends CrudRepository<Country, id>{
+
+}
