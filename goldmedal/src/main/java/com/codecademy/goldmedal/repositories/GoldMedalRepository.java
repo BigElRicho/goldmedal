@@ -19,5 +19,13 @@ public interface GoldMedalRepository extends CrudRepository<GoldMedal, Long> {
     List<GoldMedal> findByEvent(String event);
     List<GoldMedal> findByNameOrderByYearAsc(String name);
     List<GoldMedal> findByNameOrderByYearDesc(String name);
+    List<GoldMedal> findByNameOrderBySeasonAsc(String name);
+    List<GoldMedal> findByNameOrderBySeasonDesc(String name);
+    List<GoldMedal> findByNameOrderByCityAsc(String name);
+    List<GoldMedal> findByNameOrderByCityDesc(String name);
+    List<GoldMedal> findByNameOrderByNameAsc(String name);
+    List<GoldMedal> findByNameOrderByNameDesc(String name);
+    List<GoldMedal> findByNameOrderByEventAsc(String name);
+    List<GoldMedal> findByNameOrderByEventDesc(String name);
 
 }
