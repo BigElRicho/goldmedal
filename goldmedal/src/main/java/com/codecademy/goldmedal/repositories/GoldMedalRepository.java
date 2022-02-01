@@ -17,15 +17,17 @@ public interface GoldMedalRepository extends CrudRepository<GoldMedal, Long> {
     List<GoldMedal> findBySport(String sport);
     List<GoldMedal> findByDiscipline(String discipline);
     List<GoldMedal> findByEvent(String event);
-    List<GoldMedal> findByNameOrderByYearAsc(String name);
-    List<GoldMedal> findByNameOrderByYearDesc(String name);
-    List<GoldMedal> findByNameOrderBySeasonAsc(String name);
-    List<GoldMedal> findByNameOrderBySeasonDesc(String name);
-    List<GoldMedal> findByNameOrderByCityAsc(String name);
-    List<GoldMedal> findByNameOrderByCityDesc(String name);
-    List<GoldMedal> findByNameOrderByNameAsc(String name);
-    List<GoldMedal> findByNameOrderByNameDesc(String name);
-    List<GoldMedal> findByNameOrderByEventAsc(String name);
-    List<GoldMedal> findByNameOrderByEventDesc(String name);
+    List<GoldMedal> findByCountryOrderByYearAsc(String country);
+    List<GoldMedal> findByCountryOrderByYearDesc(String country);
+    List<GoldMedal> findByCountryOrderBySeasonAsc(String country);
+    List<GoldMedal> findByCountryOrderBySeasonDesc(String country);
+    List<GoldMedal> findByCountryOrderByCityAsc(String country);
+    List<GoldMedal> findByCountryOrderByCityDesc(String country);
+    List<GoldMedal> findByCountryOrderByNameAsc(String country);
+    List<GoldMedal> findByCountryOrderByNameDesc(String country);
+    List<GoldMedal> findByCountryOrderByEventAsc(String country);
+    List<GoldMedal> findByCountryOrderByEventDesc(String country);
+    List<GoldMedal> findBySeasonOrderByYearAsc(String season);
+    List<GoldMedal> findBySeasonOrderByYearDesc(String season);
 
 }

@@ -48,45 +48,46 @@ public class GoldMedalController {
             // TODO: list of medals sorted by year in the given order
             case "year":
                 if(ascendingOrder == true){
-                    medalsList = this.goldMedalRepository.findByNameOrderByYearAsc(countryName);
+                    medalsList = this.goldMedalRepository.findByCountryOrderByYearAsc(countryName);
                 }
                 else{
-                    medalsList = this.goldMedalRepository.findByNameOrderByYearDesc(countryName);
+                    medalsList = this.goldMedalRepository.findByCountryOrderByYearDesc(countryName);
                 }
                 break;
             case "season":
+                // list of medals sorted by season in the given order
                 if(ascendingOrder == true){
-                    medalsList = this.goldMedalRepository.findByNameOrderBySeasonAsc(countryName); // TODO: list of medals sorted by season in the given order
+                    medalsList = this.goldMedalRepository.findByCountryOrderBySeasonAsc(countryName);
                 }
                 else{
-                    medalsList = this.goldMedalRepository.findByNameOrderBySeasonDesc(countryName);
+                    medalsList = this.goldMedalRepository.findByCountryOrderBySeasonDesc(countryName);
                 }
                 break;
             case "city":
                 // list of medals sorted by city in the given order
                 if(ascendingOrder == true){
-                    medalsList = this.goldMedalRepository.findByNameOrderByCityAsc(countryName);
+                    medalsList = this.goldMedalRepository.findByCountryOrderByCityAsc(countryName);
                 }
                 else{
-                    medalsList = this.goldMedalRepository.findByNameOrderByCityDesc(countryName);
+                    medalsList = this.goldMedalRepository.findByCountryOrderByCityDesc(countryName);
                 }
                 break;
             case "name":
                 // list of medals sorted by athlete's name in the given order
                 if(ascendingOrder == true){
-                    medalsList = this.goldMedalRepository.findByNameOrderByNameAsc(countryName);
+                    medalsList = this.goldMedalRepository.findByCountryOrderByNameAsc(countryName);
                 }
                 else{
-                    medalsList = this.goldMedalRepository.findByNameOrderByNameDesc(countryName);
+                    medalsList = this.goldMedalRepository.findByCountryOrderByNameDesc(countryName);
                 }
                 break;
             case "event":
                 // list of medals sorted by event in the given order
                 if(ascendingOrder == true){
-                    medalsList = this.goldMedalRepository.findByNameOrderByEventAsc(countryName);
+                    medalsList = this.goldMedalRepository.findByCountryOrderByEventAsc(countryName);
                 }
                 else{
-                    medalsList = this.goldMedalRepository.findByNameorderByEventDesc(countryName);
+                    medalsList = this.goldMedalRepository.findByCountryOrderByEventDesc(countryName);
                 }
                 break;
             default:
@@ -105,11 +106,13 @@ public class GoldMedalController {
         }
 
         var country = countryOptional.get();
-        var goldMedalCount = this.goldMedalRepository.findByCountry(country.getName());// TODO: get the medal count
-
-        var summerWins = // TODO: get the collection of wins at the Summer Olympics, sorted by year in ascending order
+        // get the medal count
+        var goldMedalCount = this.goldMedalRepository.findByCountry(countryName).size();
+        // get the collection of wins at the Summer Olympics, sorted by year in ascending order
+        var summerWins = this.goldMedalRepository.findBySeasonOrderByYearAsc("Summer");
         var numberSummerWins = summerWins.size() > 0 ? summerWins.size() : null;
-        var totalSummerEvents = // TODO: get the total number of events at the Summer Olympics
+        // get the total number of events at the Summer Olympics
+        var totalSummerEvents = this.goldMedalRepository.findBySeason("Summer").size();
         var percentageTotalSummerWins = totalSummerEvents != 0 && numberSummerWins != null ? (float) summerWins.size() / totalSummerEvents : null;
         var yearFirstSummerWin = summerWins.size() > 0 ? summerWins.get(0).getYear() : null;
 
