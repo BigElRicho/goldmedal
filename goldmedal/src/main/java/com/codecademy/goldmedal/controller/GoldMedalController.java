@@ -115,15 +115,17 @@ public class GoldMedalController {
         var totalSummerEvents = this.goldMedalRepository.findBySeason("Summer").size();
         var percentageTotalSummerWins = totalSummerEvents != 0 && numberSummerWins != null ? (float) summerWins.size() / totalSummerEvents : null;
         var yearFirstSummerWin = summerWins.size() > 0 ? summerWins.get(0).getYear() : null;
-
-        var winterWins = // TODO: get the collection of wins at the Winter Olympics
+        // get the collection of wins at the Winter Olympics
+        var winterWins = this.goldMedalRepository.findBySeason("Winter");
         var numberWinterWins = winterWins.size() > 0 ? winterWins.size() : null;
-        var totalWinterEvents = // TODO: get the total number of events at the Winter Olympics, sorted by year in ascending order
+        // get the total number of events at the Winter Olympics, sorted by year in ascending order
+        var totalWinterEvents = this.goldMedalRepository.findBySeasonOrderByYearAsc("Winter").size();
         var percentageTotalWinterWins = totalWinterEvents != 0 && numberWinterWins != null ? (float) winterWins.size() / totalWinterEvents : null;
         var yearFirstWinterWin = winterWins.size() > 0 ? winterWins.get(0).getYear() : null;
-
-        var numberEventsWonByFemaleAthletes = // TODO: get the number of wins by female athletes
-        var numberEventsWonByMaleAthletes = // TODO: get the number of wins by male athletes
+        // get the number of wins by female athletes
+        var numberEventsWonByFemaleAthletes = this.goldMedalRepository.findByGender("Women").size();
+        // get the number of wins by male athletes
+        var numberEventsWonByMaleAthletes = this.goldMedalRepository.findByGender("Men").size();
 
         return new CountryDetailsResponse(
                 countryName,
