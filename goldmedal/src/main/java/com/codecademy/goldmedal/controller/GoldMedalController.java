@@ -45,7 +45,7 @@ public class GoldMedalController {
     private CountryMedalsListResponse getCountryMedalsListResponse(String countryName, String sortBy, boolean ascendingOrder) {
         List<GoldMedal> medalsList;
         switch (sortBy) {
-            // TODO: list of medals sorted by year in the given order
+            // list of medals sorted by year in the given order
             case "year":
                 if(ascendingOrder == true){
                     medalsList = this.goldMedalRepository.findByCountryOrderByYearAsc(countryName);
@@ -146,13 +146,16 @@ public class GoldMedalController {
         List<Country> countries;
         switch (sortBy) {
             case "name":
-                countries = // TODO: list of countries sorted by name in the given order
+                // list of countries sorted by name in the given order
+                countries = this.countryRepository.findAllOrderByName();
                 break;
             case "gdp":
-                countries = // TODO: list of countries sorted by gdp in the given order
+                // list of countries sorted by gdp in the given order
+                countries = this.countryRepository.findAllOrderByGdp();
                 break;
             case "population":
-                countries = // TODO: list of countries sorted by population in the given order
+                // list of countries sorted by population in the given order
+                countries = this.countryRepository.findAllOrderByPopulation();
                 break;
             case "medals":
             default:
