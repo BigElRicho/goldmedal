@@ -47,7 +47,7 @@ public class GoldMedalController {
         switch (sortBy) {
             // list of medals sorted by year in the given order
             case "year":
-                if(ascendingOrder == true){
+                if(ascendingOrder){
                     medalsList = this.goldMedalRepository.findByCountryOrderByYearAsc(countryName);
                 }
                 else{
@@ -56,7 +56,7 @@ public class GoldMedalController {
                 break;
             case "season":
                 // list of medals sorted by season in the given order
-                if(ascendingOrder == true){
+                if(ascendingOrder){
                     medalsList = this.goldMedalRepository.findByCountryOrderBySeasonAsc(countryName);
                 }
                 else{
@@ -65,7 +65,7 @@ public class GoldMedalController {
                 break;
             case "city":
                 // list of medals sorted by city in the given order
-                if(ascendingOrder == true){
+                if(ascendingOrder){
                     medalsList = this.goldMedalRepository.findByCountryOrderByCityAsc(countryName);
                 }
                 else{
@@ -74,7 +74,7 @@ public class GoldMedalController {
                 break;
             case "name":
                 // list of medals sorted by athlete's name in the given order
-                if(ascendingOrder == true){
+                if(ascendingOrder){
                     medalsList = this.goldMedalRepository.findByCountryOrderByNameAsc(countryName);
                 }
                 else{
@@ -83,7 +83,7 @@ public class GoldMedalController {
                 break;
             case "event":
                 // list of medals sorted by event in the given order
-                if(ascendingOrder == true){
+                if(ascendingOrder){
                     medalsList = this.goldMedalRepository.findByCountryOrderByEventAsc(countryName);
                 }
                 else{
@@ -159,7 +159,8 @@ public class GoldMedalController {
                 break;
             case "medals":
             default:
-                countries = // TODO: list of countries in any order you choose; for sorting by medal count, additional logic below will handle that
+                // list of countries in any order you choose; for sorting by medal count, additional logic below will handle that
+                countries = this.countryRepository.findAll();
                 break;
         }
 
@@ -183,7 +184,8 @@ public class GoldMedalController {
     private List<CountrySummary> getCountrySummariesWithMedalCount(List<Country> countries) {
         List<CountrySummary> countrySummaries = new ArrayList<>();
         for (var country : countries) {
-            var goldMedalCount = // TODO: get count of medals for the given country
+            // get count of medals for the given country
+            var goldMedalCount = this.goldMedalRepository.findByCountry(country.getName()).size();
             countrySummaries.add(new CountrySummary(country, goldMedalCount));
         }
         return countrySummaries;

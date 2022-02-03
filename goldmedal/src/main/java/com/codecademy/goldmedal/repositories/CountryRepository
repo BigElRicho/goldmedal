@@ -12,7 +12,9 @@ public interface CountryRepository extends CrudRepository<Country, Integer> {
     Optional<Country> findByCode(String code);
     Optional<Country> findByGdp(BigDecimal gdp);
     Optional<Country> findByPopulation(Integer population);
+    List<Country> findAll();
     List<Country> findAllOrderByName();
+    List<Country> findAllOrderByCode();
     List<Country> findAllOrderByGdp();
     List<Country> findAllOrderByPopulation();
 }
