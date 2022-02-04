@@ -14,9 +14,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/countries")
 public class GoldMedalController {
     // declare references to your repositories
-    private GoldMedalRepository goldMedalRepository;
-    private CountryRepository countryRepository;
-
+    private final GoldMedalRepository goldMedalRepository;
+    private final CountryRepository countryRepository;
     // update your constructor to include your repositories
     public GoldMedalController(GoldMedalRepository goldMedalRepository, CountryRepository countryRepository) {
         this.goldMedalRepository = goldMedalRepository;
@@ -147,20 +146,35 @@ public class GoldMedalController {
         switch (sortBy) {
             case "name":
                 // list of countries sorted by name in the given order
-                countries = this.countryRepository.findAllOrderByName();
+                if(ascendingOrder) {
+                    countries = this.countryRepository.findAllByOrderByName();
+                }
+                else {
+                    countries = this.countryRepository.findAllByOrderByNameDesc();
+                }
                 break;
             case "gdp":
                 // list of countries sorted by gdp in the given order
-                countries = this.countryRepository.findAllOrderByGdp();
+                if(ascendingOrder){
+                    countries = this.countryRepository.findAllByOrderByGdp();
+                }
+                else{
+                    countries = this.countryRepository.findAllByOrderByGdpDesc();
+                }
                 break;
             case "population":
                 // list of countries sorted by population in the given order
-                countries = this.countryRepository.findAllOrderByPopulation();
+                if(ascendingOrder){
+                    countries = this.countryRepository.findAllByOrderByPopulation();
+                }
+                else{
+                    countries = this.countryRepository.findAllByOrderByPopulationDesc();
+                }
                 break;
             case "medals":
             default:
                 // list of countries in any order you choose; for sorting by medal count, additional logic below will handle that
-                countries = this.countryRepository.findAll();
+                countries = (List)this.countryRepository.findAll();
                 break;
         }
 
